@@ -1,5 +1,5 @@
 import express, { Application } from "express";
-import  sequelize from "./config/database";
+import sequelize from "./config/database";
 import * as dotenv from "dotenv"
 import cors from "cors"
 import cookieParser from 'cookie-parser'
@@ -9,18 +9,22 @@ dotenv.config()
 import user from "./route/user.route";
 import product from "./route/product.route";
 import auth from "./route/auth.route";
+import cart from "./route/cart.route";
+
+// model
+import Product from "./models/product.model";
 import User from "./models/user.model";
+import Cart from "./models/cart.model";
 
 class App {
      public app: Application
-
      constructor() {
           this.app = express()
           this.plugin()
           this.routes()
           this.database()
      }
-     plugin(): void {
+     plugin(): void {    
           this.app.use(cors({
                credentials: true
           }))
@@ -37,13 +41,16 @@ class App {
           this.app.use(auth)
           this.app.use(user)
           this.app.use(product)
+          this.app.use(cart)
      }
      database(): void {
           sequelize.authenticate().then(() => {
                console.log('database connected');
                User.sync()
-          }).catch((e: any) => {
-               console.log('error', e);
+               Product.sync()
+               Cart.sync()
+          }).catch((error: any) => {
+               console.log('error', error);
           })
      }
 }

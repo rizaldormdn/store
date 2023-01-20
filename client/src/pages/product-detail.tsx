@@ -13,21 +13,21 @@ function ProductDetail() {
                     </div>
                     <div>
                          <div>
-                              <h1 className='font-xl'>Vans old skool</h1>
+                              <h1 className='font-xl font-bold'>Vans old skool</h1>
                               <p className='mt-5'>Rp. 799.000</p>
                          </div>
                          <div className='mt-10'>
                               <h2>Size</h2>
                               <div className='flex gap-7 mt-2'>
-                                   <p className='border p-3 cursor-pointer hover:bg-slate-600 hover:text-white'>S</p>
-                                   <p className='border p-3 cursor-pointer hover:bg-slate-600 hover:text-white'>M</p>
-                                   <p className='border p-3 cursor-pointer hover:bg-slate-600 hover:text-white'>L</p>
-                                   <p className='border p-3 cursor-pointer hover:bg-slate-600 hover:text-white'>XL</p>
+                                   <p className='border p-3 cursor-pointer hover:bg-slate-600 hover:text-white'>39</p>
+                                   <p className='border p-3 cursor-pointer hover:bg-slate-600 hover:text-white'>40</p>
+                                   <p className='border p-3 cursor-pointer hover:bg-slate-600 hover:text-white'>41</p>
+                                   <p className='border p-3 cursor-pointer hover:bg-slate-600 hover:text-white'>42</p>
                               </div>
                          </div>
                          <div className='mt-10'>
                               <h2>Quantity</h2>
-                              <div className='flex gap-7'>
+                              <div className='flex gap-7 mt-2'>
                                    <button className='border p-3 cursor-pointer hover:bg-slate-600 hover:text-white'>-</button>
                                    <p className='border p-3'>1</p>
                                    <button className='border p-3 cursor-pointer hover:bg-slate-600 hover:text-white'>+</button>

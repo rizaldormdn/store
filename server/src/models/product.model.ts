@@ -9,6 +9,7 @@ export class Product extends Model {
      public price!: number
      public stock!: number
      public image!: string
+     public category!: string
 
      public readonly createdAt!: Date
      public readonly updatedAt!: Date
@@ -21,24 +22,31 @@ Product.init({
      },
      title: {
           type: DataTypes.STRING,
-          unique: true,
+          allowNull: false
      },
      description: {
           type: DataTypes.STRING,
-          unique: true,
+          allowNull: false
      },
      price: {
-          type: DataTypes.STRING,
+          type: DataTypes.DECIMAL,
+          allowNull: false
      },
      stock: {
-          type: DataTypes.STRING,
+          type: DataTypes.DECIMAL,
+          allowNull: false
      },
      image: {
-          type: DataTypes.STRING
+          type: DataTypes.STRING,
+          allowNull: false
+     },
+     category: {
+          type: DataTypes.STRING,
+          allowNull: false
      }
 }, {
      sequelize,
-     tableName: 'products',
+     tableName: 'products'
 });
 
 export default Product

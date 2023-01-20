@@ -2,19 +2,33 @@ import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 
 
-export const authenticationToken = (req: Request, res: Response, next: NextFunction) => {
+export const token = (req: Request, res: Response, next: NextFunction) => {
      try {
-          const authToken = req.headers['authorization'] as string
-          const token = authToken && authToken.split(' ')[1]
-          if (token === null) {
-               return res.status(401).json({ message: 'Unautorized' })
-          }
-          const cekToken = jwt.verify(token, process.env.JWT_TOKEN || 'secret')
-          if (cekToken) {
-               req.app.locals.cekToken = cekToken
+          const headers = req.headers['authorization'] as string
+          const token = headers && headers.split(' ')[1]
+
+          const decoded = jwt.verify(token, process.env.ACCESS_TOKEN || 'secret')
+          if (decoded) {
+               req.app.locals.decoded = decoded
                next()
           }
-          return res.status(403)
+     } catch (error) {
+          res.status(500).json({
+               message: error
+          })
+     }
+}
+export const admin = (req: Request, res: Response, next: NextFunction) => {
+     try {
+          const headers = req.headers['authorization'] as string
+          const token = headers && headers.split(' ')[1]
+
+          const decoded = jwt.verify(token, process.env.ACCESS_TOKEN || 'secret')
+          if (decoded === 'admin') {
+               next()
+          } else {
+               res.status(400).json({ msg: 'not authorized' })
+          }
      } catch (error) {
           res.status(500).json({
                message: error

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../component/organisms/navbar'
-import Axios from './fetch'
+import Axios from '../api/api'
 
 
 interface dataregister {
@@ -21,7 +21,7 @@ const Register: React.FC = () => {
           e.preventDefault()
           try {
                const response = await Axios.post('/auth/register', user)
-               navigate('/')
+               navigate('/login')
                return console.log(response);
           } catch (err) {
                console.log(err);
@@ -63,7 +63,7 @@ const Register: React.FC = () => {
                          className='border border-gray-500 mt-5 py-1 rounded px-3 '
                     />
                     <div className='flex mt-5 justify-between items-center'>
-                         <p className='text-sm'>don't have account ? <span onClick={() => navigate('/login')} className='cursor-pointer'>Sign In</span></p>
+                         <p className='text-sm'>have account ? <span onClick={() => navigate('/login')} className='cursor-pointer'>Sign In</span></p>
                          <button type='submit' className='text-white bg-slate-600 p-1.5 rounded'>Sign Up</button>
                     </div>
                </form>

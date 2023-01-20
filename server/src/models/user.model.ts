@@ -6,10 +6,11 @@ export class User extends Model {
      public username!: string
      public email!: string
      public password!: string
-     public token!: string
+     public role!: string
 
      public readonly createdAt!: Date
      public readonly updatedAt!: Date
+     static username: any;
 }
 User.init({
      id: {
@@ -31,8 +32,9 @@ User.init({
           type: DataTypes.STRING,
           allowNull: false
      },
-     token: {
-          type: DataTypes.STRING
+     role: {
+          type: DataTypes.ENUM('admin', 'user'),
+          defaultValue: 'user'
      }
 }, {
      sequelize,

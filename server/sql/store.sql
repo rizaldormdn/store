@@ -13,10 +13,11 @@ CREATE TABLE IF NOT EXISTS `product` (
      `price` INT NOT NULL,
      `stock` INT NOT NULL,
      `image` VARCHAR(255),
+     `category` VARCHAR(100)
      PRIMARY key (`id`)
 );
 CREATE TABLE IF NOT EXISTS`cart` (
-    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT,
     customer_id INT,
     quantity INT,

@@ -1,24 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import Card from '../component/molecules/card'
 import Navbar from '../component/organisms/navbar'
 import sepatu1 from '../assets/sepatu1.jpg'
 import Footer from '../component/organisms/footer'
-import Axios from './fetch'
+import Axios from '../api/api'
+import { useNavigate } from 'react-router-dom'
+import { FaRegHeart } from 'react-icons/fa'
 
-interface dataProduct {
+
+interface product {
   id: number
   title: string
+  description: string
   price: number
 }
 
 const ProductMan: React.FC = () => {
-  const [products, setProducts] = useState<dataProduct[]>([])
+  const navigate = useNavigate()
+  const [products, setProducts] = useState<product[]>([])
 
   const getProduct = async () => {
     try {
-      const result = await Axios.get('/products')
-      setProducts(result.data)
-      // console.log(result.data);
+      const res = await Axios.get('/products/category?category=pria')
+      if (Array.isArray(res.data)) {
+        return setProducts(res.data)
+      } else {
+        setProducts(Object.values(res.data.data))
+      }
     } catch (error) {
       console.log(error);
     }
@@ -29,15 +36,20 @@ const ProductMan: React.FC = () => {
   return (
     <>
       <Navbar />
-      <div className='flex gap-10 flex-wrap mt-10 justify-center'>
-        {/* <Card title={product.title} price={product.price} image={sepatu1} /> */}
-        <Card title='Nike' price='Rp. 799.000' image={sepatu1} />
-        <Card title='Nike' price='Rp. 799.000' image={sepatu1} />
-        <Card title='Nike' price='Rp. 799.000' image={sepatu1} />
-        <Card title='Nike' price='Rp. 799.000' image={sepatu1} />
-        <Card title='Nike' price='Rp. 799.000' image={sepatu1} />
-        <Card title='Nike' price='Rp. 799.000' image={sepatu1} />
-        <Card title='Nike' price='Rp. 799.000' image={sepatu1} />
+      <div className='grid grid-cols-4 place-content-evenly gap-4 w-[70%] m-auto mt-10'>
+        {products.map((product) => (
+          <div key={product.id} className='p-2 shadow-lg rounded border w-[300px]'>
+            <img src={sepatu1} alt="" className='w-[280px] h-[250px] rounded ' />
+            <div className='flex justify-between mt-2'>
+              <h1 className='font-bold'>{product.title}</h1>
+              <button className='text-xl'><FaRegHeart /></button>
+            </div>
+            <p className='font-bold mt-2'>{'Rp' + product.price}</p>
+            {/* <p>{product.description}</p> */}
+            {/* <button onClick={() => navigate('/product-detail')} className='bg-slate-500 w-full rounded text-white'>Detail</button> */}
+          </div>
+        ))
+        }
       </div>
       <Footer />
     </>
