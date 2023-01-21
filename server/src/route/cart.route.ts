@@ -1,12 +1,14 @@
-import express, { Router } from "express";
-import { addToCart, deleteToCart, getCartById, getCartItem, updateCart } from "../controller/cart.controller";
+import cartController from "../controller/cart.controller";
+import baseRouter from "./base.route";
 
-const cart = express.Router()
+class cartRoutes extends baseRouter {
+     routes(): void {
+          this.router.post('/carts', cartController.addToCart)
+          this.router.get('/carts', cartController.getCartItem)
+          this.router.get('/carts/:id', cartController.getCartById)
+          this.router.put('/carts/:id', cartController.updateCart)
+          this.router.delete('/carts/:id', cartController.deleteToCart)
+     }
+}
 
-cart.post('/carts', addToCart)
-cart.get('/carts', getCartItem)
-cart.get('/carts/:id', getCartById)
-cart.put('/carts/:id', updateCart)
-cart.delete('/carts/:id', deleteToCart)
-
-export default cart
+export default new cartRoutes().router

@@ -9,8 +9,7 @@ function Cart() {
   return (
     <>
       <Navbar />
-      <h1 className='mt-10 mb-10 font-bold text-xl'>Keranjang</h1>
-      <div className='flex justify-center flex-wrap gap-5'>
+      <div className='flex justify-center flex-wrap gap-5 mt-20'>
         <div className='flex p-2 justify-evenly items-center border shadow-lg w-[50%]'>
           <input className='' type="checkbox" name="" id="" />
           <img src={sepatu1} alt="" className='w-[80px] h-[80px]' />

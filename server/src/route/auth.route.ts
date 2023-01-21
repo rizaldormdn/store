@@ -1,12 +1,14 @@
-import express from "express";
-import { login, logout, profile, register } from "../controller/auth.controller";
-import { token } from "../middlewares/authentication.token";
-import { validateRegister, validateLogin } from "../middlewares/validation";
+import authController from "../controller/auth.controller";
+import { token } from "../middlewares/validation";
+import { validate } from "../middlewares/validation";
+import baseRouter from "./base.route";
 
-const auth = express.Router()
 
-auth.post('/auth/register', validateRegister, register)
-auth.post('/auth/login', validateLogin, login)
-auth.delete('/auth/logout', logout)
-auth.get('/auth/profile', token, profile)
-export default auth
+class authRoutes extends baseRouter {
+     routes(): void {
+          this.router.post('/auth/register', validate, authController.register)
+          this.router.post('/auth/login', validate, authController.login)
+          this.router.get('/auth/profile', token, authController.profile)
+     }
+}
+export default new authRoutes().router

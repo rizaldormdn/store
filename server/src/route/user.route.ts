@@ -1,12 +1,14 @@
-import express, { Router } from "express";
-import { create, deleted, read, readById, update } from "../controller/user.controller";
-
-const user = express.Router()
-user.post('/users', create)
-user.get('/users', read)
-user.get('/users/:id', readById)
-user.put('/users/:id', update)
-user.delete('/users/:id', deleted)
+import userController from "../controller/user.controller";
+import baseRouter from "./base.route";
 
 
-export default user
+class userRoutes extends baseRouter {
+     public routes(): void {
+          this.router.post('/users', userController.create)
+          this.router.get('/users', userController.read)
+          this.router.get('/users/:id', userController.readById)
+          this.router.put('/users/:id', userController.update)
+          this.router.delete('/users/:id', userController.deleted)
+     }
+}
+export default new userRoutes().router

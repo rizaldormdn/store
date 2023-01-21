@@ -6,25 +6,25 @@ import cookieParser from 'cookie-parser'
 dotenv.config()
 
 // router
-import user from "./route/user.route";
-import product from "./route/product.route";
-import auth from "./route/auth.route";
-import cart from "./route/cart.route";
+import userRoute from "./route/user.route";
+import productRoute from "./route/product.route";
+import authRoute from "./route/auth.route";
+import cartRoute from "./route/cart.route";
 
 // model
 import Product from "./models/product.model";
-import User from "./models/user.model";
+import  User from "./models/user.model"
 import Cart from "./models/cart.model";
 
 class App {
      public app: Application
      constructor() {
           this.app = express()
-          this.plugin()
+          this.middlewares()
           this.routes()
           this.database()
      }
-     plugin(): void {    
+     middlewares(): void {    
           this.app.use(cors({
                credentials: true
           }))
@@ -38,10 +38,10 @@ class App {
           });
      }
      routes(): void {
-          this.app.use(auth)
-          this.app.use(user)
-          this.app.use(product)
-          this.app.use(cart)
+          this.app.use(authRoute)
+          this.app.use(userRoute)
+          this.app.use(productRoute)
+          this.app.use(cartRoute)
      }
      database(): void {
           sequelize.authenticate().then(() => {
