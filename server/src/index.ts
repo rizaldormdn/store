@@ -2,7 +2,6 @@ import express, { Application } from "express";
 import sequelize from "./config/database";
 import * as dotenv from "dotenv"
 import cors from "cors"
-import cookieParser from 'cookie-parser'
 dotenv.config()
 
 // router
@@ -28,7 +27,6 @@ class App {
           this.app.use(cors({
                credentials: true
           }))
-          this.app.use(cookieParser())
           this.app.use(express.json())
           this.app.use((_, res, next) => {
                res.setHeader('Access-Control-Allow-Origin', String(process.env.ORIGINS));

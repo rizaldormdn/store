@@ -20,13 +20,12 @@ export const token = (req: Request, res: Response, next: NextFunction) => {
      }
      const secret = process.env.ACCESS_TOKEN || 'secret'
      try {
-          const token: string = req.headers['authorization'].split(' ')[1]
+          const token = req.headers['authorization'].split(' ')[1]
           const user = jwt.verify(token, secret)
           if (user) {
                next()
                req.app.locals.user = user
           }
-          // return res.status(400).json({ msg: 'token invalid' })
      } catch (error) {
           res.status(500).json({
                message: error

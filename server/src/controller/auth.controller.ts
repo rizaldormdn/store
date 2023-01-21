@@ -38,13 +38,11 @@ class authController {
                if (!validate) {
                     return res.status(401).json({ msg: 'data tidak valid' })
                }
-               const token = authentication.token(user.id, user.username, user.email)
                return res.status(200).json({
                     msg: 'login success',
-                    token
+                    access_token: jwt.sign({ id: user.id, username: user.username, email: user.email }, process.env.ACCESS_TOKEN || 'secret', { expiresIn: process.env.EXP_TOKEN }),
+                    // refresh_token: jwt.sign({ id: user.id, username: user.username, email: user.email }, process.env.JWT_REFRESH_TOKEN || 'secret')
                })
-               // access_token: jwt.sign({ users }, process.env.ACCESS_TOKEN || 'secret', { expiresIn: process.env.EXP_TOKEN }),
-               // refresh_token: jwt.sign({ users }, process.env.JWT_REFRESH_TOKEN || 'secret')
           } catch (error) {
                return res.status(400).json(error)
           }
