@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Navbar from '../component/organisms/navbar'
 import Axios from '../api/api'
 
 
@@ -34,39 +33,43 @@ const Register: React.FC = () => {
      }
      return (
           <div>
-               <Navbar />
-               <h1 className='text-center text-3xl mt-10'>Create Account</h1>
-               <form onSubmit={register} className='flex flex-col max-w-lg mx-auto mt-10 p-10'>
-                    <input
-                         type="text"
-                         name='username'
-                         required placeholder="Name"
-                         value={user.username}
-                         onChange={handleChange}
-                         className='border border-gray-500 mt-5 py-1 rounded px-3 '
-                    />
-                    <input
-                         type="email"
-                         name='email'
-                         required
-                         placeholder="Email"
-                         value={user.email}
-                         onChange={handleChange}
-                         className='border border-gray-500 mt-5 py-1 rounded px-3 '
-                    />
-                    <input
-                         type="password" name='password'
-                         required
-                         placeholder="Password"
-                         value={user.password}
-                         onChange={handleChange}
-                         className='border border-gray-500 mt-5 py-1 rounded px-3 '
-                    />
-                    <div className='flex mt-5 justify-between items-center'>
-                         <p className='text-sm'>have account ? <span onClick={() => navigate('/login')} className='cursor-pointer'>Sign In</span></p>
-                         <button type='submit' className='text-white bg-slate-600 p-1.5 rounded'>Sign Up</button>
+               <div className='flex justify-center flex-wrap items-center gap-20 mt-[15%]'>
+                    <div>
+                         <h1 className='text-5xl font-bold'>Sign Up to <br /> Start Shopping</h1>
+                         <p className='text-sm mt-5'>have account ? <span onClick={() => navigate('/login')} className='cursor-pointer' >Sign In</span></p>
+
                     </div>
-               </form>
+                    <form onSubmit={register} className='flex flex-col'>
+                         <input
+                              type="text"
+                              name='username'
+                              required placeholder="Name"
+                              value={user.username}
+                              onChange={handleChange}
+                              className='border w-96 h-10 border-gray-500 mt-5 py-1 rounded px-3 '
+                         />
+                         <input
+                              type="email"
+                              name='email'
+                              required
+                              placeholder="Email"
+                              value={user.email}
+                              onChange={handleChange}
+                              className='border w-96 h-10 border-gray-500 mt-5 py-1 rounded px-3 '
+                         />
+                         <input
+                              type="password" name='password'
+                              required
+                              placeholder="Password"
+                              value={user.password}
+                              onChange={handleChange}
+                              className='border w-96 h-10 border-gray-500 mt-5 py-1 rounded px-3 '
+                         />
+                         <div className='flex mt-5 justify-between items-center'>
+                              <button type='submit' className='text-white bg-slate-600 w-full p-1.5 rounded'>Sign Up</button>
+                         </div>
+                    </form>
+               </div>
           </div >
      )
 }

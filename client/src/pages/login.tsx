@@ -21,8 +21,6 @@ const Login: React.FC = () => {
      }
      return (
           <div>
-               {/* <Navbar /> */}
-               {/* <h1 className='text-center text-3xl mt-10'>Login</h1> */}
                <div className='flex justify-center flex-wrap items-center gap-20 mt-[15%]'>
                     <div>
                          <h1 className='text-5xl font-bold'>Sign In to <br /> Start Shopping</h1>

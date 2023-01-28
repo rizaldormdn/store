@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 import sequelize from "./config/database";
 import * as dotenv from "dotenv"
+import Path from "path";
 import cors from "cors"
 dotenv.config()
 
@@ -12,7 +13,7 @@ import cartRoute from "./route/cart.route";
 
 // model
 import Product from "./models/product.model";
-import  User from "./models/user.model"
+import User from "./models/user.model"
 import Cart from "./models/cart.model";
 
 class App {
@@ -23,11 +24,13 @@ class App {
           this.routes()
           this.database()
      }
-     middlewares(): void {    
-          this.app.use(cors({
-               credentials: true
-          }))
+     middlewares(): void {
+          this.app.use('/assets', express.static(Path.join(__dirname, '/server/assets')))
           this.app.use(express.json())
+          this.app.use(cors({
+               credentials: true,
+               origin: 'http://localhost:3000'
+          }))
           this.app.use((_, res, next) => {
                res.setHeader('Access-Control-Allow-Origin', String(process.env.ORIGINS));
                res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');

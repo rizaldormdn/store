@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from '../component/organisms/navbar'
-import sepatu2 from '../assets/sepatu2.jpg'
+import dress1 from '../assets/dress1.jpg'
 import Footer from '../component/organisms/footer'
 import { useNavigate } from 'react-router-dom'
 import Axios from '../api/api'
@@ -13,6 +13,7 @@ interface product {
      title: string
      description: string
      price: number
+     image: string
 }
 
 function ProductWoman() {
@@ -37,20 +38,20 @@ function ProductWoman() {
      return (
           <div>
                <Navbar />
-               <div className='grid grid-cols-4 place-content-evenly gap-4 w-[70%] m-auto mt-10'>
-                    {products.map((product) => (
-                         <div key={product.id} className='p-2 shadow-lg rounded border w-[300px]'>
-                              <img src={sepatu2} alt="" className='w-[280px] h-[250px] rounded ' />
-                              <div className='flex justify-between mt-2'>
-                                   <h1 className='font-bold'>{product.title}</h1>
-                                   <button className='text-xl'><FaRegHeart /></button>
+               <div className="min-h-[100vh]">
+                    <div onClick={() => navigate('/product-detail')} className='flex mt-10 flex-wrap cursor-pointer'>
+                         {products.map((product) => (
+                              <div key={product.id} className='p-2 shadow-lg rounded-xl border w-[300px] ml-4'>
+                                   <img src={dress1} alt="" className='w-[280px] h-[250px] rounded ' />
+                                   <div className='flex justify-between mt-2'>
+                                        <h1 className='font-bold'>{product.title}</h1>
+                                        <button className='text-xl'><FaRegHeart /></button>
+                                   </div>
+                                   <p className='font-bold mt-2'>{'Rp' + product.price}</p>
                               </div>
-                              <p className='font-bold mt-2'>{'Rp' + product.price}</p>
-                              {/* <p>{product.description}</p> */}
-                              {/* <button onClick={() => navigate('/product-detail')} className='bg-slate-500 w-full rounded text-white'>Detail</button> */}
-                         </div>
-                    ))
-                    }
+                         ))
+                         }
+                    </div>
                </div>
                <Footer />
           </div>

@@ -5,7 +5,16 @@ import Product from "../models/product.model"
 class productController {
      create = async (req: Request, res: Response): Promise<Response> => {
           try {
-               let products = await Product.create(req.body)
+               const { title, description, price, stock, category } = req.body
+               const image = req.file?.filename
+               let products = await Product.create({
+                    title,
+                    description,
+                    price,
+                    stock,
+                    image,
+                    category
+               })
                return res.status(200).json({
                     msg: 'Berhasil menambahkan product',
                     data: products

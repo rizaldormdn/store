@@ -7,16 +7,18 @@ import ProductMan from '../pages/product.man'
 import ProductWoman from '../pages/productWoman'
 import ProductDetail from '../pages/product-detail'
 import Cart from '../pages/cart'
-import ManageProduct from '../pages/manageProduct'
 
 
 const Router = () => {
      const navigate = useNavigate()
      useEffect(() => {
-          if (!sessionStorage.getItem('access_token')) {
+          const token = sessionStorage.getItem("access_token");
+          if (!token) {
                navigate('/login')
+          } else {
+               navigate('/')
           }
-     }, [navigate])
+     }, []);
 
      return (
           <>
@@ -28,7 +30,6 @@ const Router = () => {
                     <Route path="/product-woman" element={<ProductWoman />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/product-detail" element={<ProductDetail />} />
-                    <Route path="/manage-product" element={<ManageProduct />} />
                </Routes>
           </>
      )
